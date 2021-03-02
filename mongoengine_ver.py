@@ -9,10 +9,14 @@ class User(Document):
     name=StringField(required=True,max_length=20)
     number=IntField(required=True)
 
-class Note(Document):
+class Note(EmbeddedDocument):
+    note=StringField(required=True)
+
+class Lamp(Document):
     title=StringField(required=True,max_length=20)
     published=DateTimeField(default=datetime.datetime.now)
     user= ReferenceField('User',reverse_delete_rule=CASCADE)
+    note=ListField(EmbeddedDocumentField(Note))
 
 user_1=User(
     name='Love',

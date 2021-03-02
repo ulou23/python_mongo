@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lamp.apps.lampConfig'
+    'lamp.apps.lampConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=False
+CORS_ORIGIN_WHITELIST=(
+    'http://localhost:8081'
+)
 
 ROOT_URLCONF = 'mongo_django.urls'
 
@@ -77,7 +85,9 @@ WSGI_APPLICATION = 'mongo_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'lampp',
+        'NAME': 'lamp',
+        'HOST': '127.0.0.1',
+        'PORT': 27017,
     }
 }
 
