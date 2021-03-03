@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lamp.apps.lampConfig',
+    'lamp.apps.LampConfig',
     'rest_framework',
 ]
 

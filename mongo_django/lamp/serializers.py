@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Lamp
+from lamp.models import Lamp,Category
 
 class LampSerializer(serializers.ModelSerializer):
 
@@ -10,3 +10,9 @@ class LampSerializer(serializers.ModelSerializer):
                 'published',
                 'phone',
                 'category',)
+
+class CatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Category
+        fields=(
+                'title',)
