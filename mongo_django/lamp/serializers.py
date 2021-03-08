@@ -2,22 +2,22 @@ from rest_framework import serializers
 from lamp.models import Lamp,Category
 
 
+class CatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('pk', 'title',)
+
 class LampSerializer(serializers.ModelSerializer):
-    category=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(),many=True)
+    category=CatSerializer(read_only=True,required=False,many=True)
 
     class Meta:
         model=Lamp
-        fields=('id',
+        fields=('pk',
                 'name',
                 'published',
                 'phone',
                 'category',)
 
-class CatSerializer(serializers.ModelSerializer):
-    lamps = LampSerializer(many=True, read_only=True)
 
-    class Meta:
-        model = Category
-        fields = ( 'title', 'lamps')
 
 

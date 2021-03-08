@@ -82,15 +82,30 @@ WSGI_APPLICATION = 'mongo_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+import environ
+env=environ.Env()
+environ.Env.read_env()
+
+import os
+
+"""DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'lamp',
-        'HOST': '127.0.0.1',
-        'PORT': 27017,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD') ,
+        'HOST': env('HOST')       ,
+        'PORT': '5432',
     }
 }
+"""
 
+BROKER_URL='mongodb://localhost:27017/newest'
+CELERY_RESULT_BACKEND='mongodb://localhost:27017/newest'
+CELERY_ACCEPT_CONTENT=['application/json']
+CELERY_TASK_SERIALIZER='json'
+CELERY_RESULT_SERIALIZER='json'
+CELERY_TIMEZONE='UTC'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

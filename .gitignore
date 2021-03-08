@@ -1,4 +1,4 @@
 /venv/
-.env
+mongo_django/mongo_django/.env
 .idea
 
