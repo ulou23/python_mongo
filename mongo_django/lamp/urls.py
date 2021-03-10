@@ -1,7 +1,13 @@
 from django.conf.urls import url
-from lamp import views_lamp, views_cat
+from django.urls import include
+from lamp import views_lamp
+from rest_framework.routers import DefaultRouter
+
+router=DefaultRouter()
+router.register(r'api/lamps', views_lamp.LampListAPI,basename='lamp')
+router.register('api/cat', views_lamp.CatViewSet,basename='cat')
 
 urlpatterns=[
-    url(r'^api/lamps$', views_lamp.lamp_list)  ,
-    url(r'^api/cat$', views_cat.cat_list)
+    url(r'',  include(router.urls)     )
+
 ]
