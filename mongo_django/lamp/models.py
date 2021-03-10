@@ -11,6 +11,7 @@ class Lamp(models.Model):
     published = models.DateTimeField(auto_now_add=True)
     name=models.CharField(max_length=20)
     phone=models.IntegerField(null=True)
+    person=models.CharField(max_length=50, default='myBoss')
 
     category=models.ManyToManyField(Category,verbose_name="list of lamps",blank=True)
 

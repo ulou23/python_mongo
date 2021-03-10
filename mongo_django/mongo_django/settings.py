@@ -82,23 +82,25 @@ WSGI_APPLICATION = 'mongo_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-import environ
-env=environ.Env()
-environ.Env.read_env()
-
 import os
+from decouple import config
 
-"""DATABASES = {
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG=config('DEBUG',cast=bool)
+
+
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('NAME'),
-        'USER': env('USER'),
-        'PASSWORD': env('PASSWORD') ,
-        'HOST': env('HOST')       ,
+        'NAME': config('DB_NAME'),
+
+        'USER': config("DB_USER"),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config("DB_HOST"),
         'PORT': '5432',
     }
 }
-"""
+
 
 BROKER_URL='mongodb://localhost:27017/newest'
 CELERY_RESULT_BACKEND='mongodb://localhost:27017/newest'
