@@ -13,3 +13,25 @@ class CatViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
 
 
+# new
+
+from rest_framework import generics
+class CategoryList(generics.ListAPIView):
+    serializer_class = CatSerializer
+    queryset = Category.objects.all()
+
+class CategoryDetail(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CatSerializer
+
+class LampList(generics.ListCreateAPIView):
+    queryset = Lamp.objects.all()
+    serializer_class = LampSerializer
+
+class LampDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Lamp.objects.all()
+    serializer_class = LampSerializer
+
+
+
+
