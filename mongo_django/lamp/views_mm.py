@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets  , generics     ,views
 from lamp.models import Lamp,Category
 from lamp.serializers import LampSerializer,CatSerializer
 
@@ -26,7 +26,19 @@ class LampView(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class CatView(viewsets.ModelViewSet):
+    
     serializer_class = CatSerializer
     def get_queryset(self):
         cat=Category.objects.all()
         return cat
+
+from django_filters.rest_framework import DjangoFilterBackend
+import django_filters
+
+
+class CatFilter(viewsets.ModelViewSet):
+    queryset = Lamp.objects.all()
+
+    def get_queryset(self):
+        return self.queryset \
+    .filter(category=self.kwargs.get('categories'))
